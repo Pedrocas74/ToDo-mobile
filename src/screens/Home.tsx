@@ -6,18 +6,24 @@ import TaskItem from "../components/TaskItem";
 import { useTasks } from "../hooks/useTasks";
 
 export default function Home() {
-  const { tasks, addTask, removeTask } = useTasks();
+  const { tasks, addTask, removeTask, toggleTask } = useTasks();
 
   return (
     <View style={styles.page}>
       <Text style={styles.title}>ToDo</Text>
-      <TaskInput addTask={addTask}/>
+      <TaskInput addTask={addTask} />
 
-      <View >
+      <View>
         <FlatList
           data={tasks}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TaskItem task={item} removeTask={removeTask} />}
+          renderItem={({ item }) => (
+            <TaskItem
+              task={item}
+              removeTask={removeTask}
+              toggleTask={toggleTask}
+            />
+          )}
         />
       </View>
     </View>
@@ -29,6 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: "red",
+    padding: 10,
   },
 
   title: {
@@ -38,6 +45,6 @@ const styles = StyleSheet.create({
 
   tasksContainer: {
     borderWidth: 1,
-    borderColor: "orange"
-  }
+    borderColor: "orange",
+  },
 });
