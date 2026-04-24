@@ -4,13 +4,14 @@ import { Task } from "../hooks/useTasks";
 
 type Props = {
     task: Task;
+    removeTask: (id: string) => void;
 }
 
-export default function TaskItem({ task }: Props) {
+export default function TaskItem({ task, removeTask }: Props) {
   return (
     <View style={styles.task}>
       <Text>{task.text}</Text>
-      <Pressable style={styles.deleteBtn}>
+      <Pressable style={styles.deleteBtn} onPress={() => removeTask(task.id)}>
         <Text>-</Text>
       </Pressable>
     </View>

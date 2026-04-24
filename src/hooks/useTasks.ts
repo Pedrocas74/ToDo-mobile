@@ -10,6 +10,7 @@ export type Task = {
 type UseTasksReturn = {
   tasks: Task[];
   addTask: (text: string) => void;
+  removeTask: (id: string) => void;
 };
 
 export const useTasks = (): UseTasksReturn => {
@@ -25,8 +26,13 @@ export const useTasks = (): UseTasksReturn => {
     setTasks((prev) => [newTask, ...prev]);
   };
 
+  const removeTask = (id: string) => {
+    setTasks(tasks.filter((t) => t.id !== id));
+  }
+
   return {
     tasks,
     addTask,
+    removeTask
   };
 };

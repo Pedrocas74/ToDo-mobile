@@ -6,7 +6,7 @@ import TaskItem from "../components/TaskItem";
 import { useTasks } from "../hooks/useTasks";
 
 export default function Home() {
-  const { tasks, addTask } = useTasks();
+  const { tasks, addTask, removeTask } = useTasks();
 
   return (
     <View style={styles.page}>
@@ -17,7 +17,7 @@ export default function Home() {
         <FlatList
           data={tasks}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TaskItem task={item} />}
+          renderItem={({ item }) => <TaskItem task={item} removeTask={removeTask} />}
         />
       </View>
     </View>
