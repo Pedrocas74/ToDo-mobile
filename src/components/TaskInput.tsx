@@ -1,18 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
-//custom functions
-import { useTasks } from "../hooks/useTasks";
 
-export default function TaskInput() {
+type Props = {
+  addTask: (text: string) => void;
+};
+
+export default function TaskInput({ addTask }: Props) {
   const [input, setInput] = useState<string>("");
-  const { addTask } = useTasks();
 
   return (
     <View>
       <Text>What do you need ToDo?</Text>
 
-      <View>
+      <View style={styles.inputContainer}>
         <TextInput
           value={input}
           onChangeText={setInput}
@@ -20,7 +21,11 @@ export default function TaskInput() {
           placeholder="Write a task here"
         ></TextInput>
 
-        <Pressable onPress={() => addTask(input)}>
+        <Pressable style={styles.addButton} onPress={(e) => {
+          e.preventDefault();
+          addTask(input);
+          setInput("");
+        }}>
           <Text>Add</Text>
         </Pressable>
       </View>
@@ -29,9 +34,23 @@ export default function TaskInput() {
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+   borderWidth: 1,
+   borderColor: "blue",
+   flexDirection: "row"
+  },
+
   input: {
+    flex: 3,
     borderWidth: 1,
     borderRadius: 7,
     padding: 10,
   },
+
+  addButton: {
+    flex: 1,
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });

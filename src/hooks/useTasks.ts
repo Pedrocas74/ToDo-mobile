@@ -1,5 +1,5 @@
 // logic for adding/removing/toggling tasks
-import React, { useState } from "react";
+import { useState } from "react";
 
 export type Task = {
   id: string;
