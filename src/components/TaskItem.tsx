@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: "green",
+    padding: 5
   },
 
   taskRight: {

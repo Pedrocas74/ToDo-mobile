@@ -2,20 +2,28 @@ import { Text, View, StyleSheet, FlatList } from "react-native";
 //custom components
 import TaskInput from "../components/TaskInput";
 import TaskItem from "../components/TaskItem";
+import TaskFilters from "../components/TaskFilters";
 //custom hooks
 import { useTasks } from "../hooks/useTasks";
 
+
 export default function Home() {
-  const { tasks, addTask, removeTask, toggleTask } = useTasks();
+  const { filteredTasks, addTask, removeTask, toggleTask, setFilter } = useTasks();
 
   return (
     <View style={styles.page}>
       <Text style={styles.title}>ToDo</Text>
-      <TaskInput addTask={addTask} />
+
+      <View style={styles.inputContainer}>
+        <TaskInput addTask={addTask} />
+      </View>
+      
+      <TaskFilters setFilter={setFilter} />
 
       <View>
         <FlatList
-          data={tasks}
+        style={styles.list}
+          data={filteredTasks}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <TaskItem
@@ -33,14 +41,23 @@ export default function Home() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: "red",
     padding: 10,
+    alignItems: "center"
   },
 
   title: {
     fontSize: 42,
     fontWeight: 700,
+    marginTop: 25
+  },
+
+  inputContainer: {
+    marginTop: 50,
+    width: 400
+  },
+
+  list: {
+    width: 400
   },
 
   tasksContainer: {
