@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
-import { isNonEmpty, sanitize } from "../utils/helpers";
+import { isNonEmpty, sanitize } from "../styles/utils/helpers";
 
 type Props = {
   addTask: (text: string) => void;
